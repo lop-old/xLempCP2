@@ -1,5 +1,5 @@
 {
-	"name":        "pxn/xLempCP/Shell",
+	"name":        "pxn/xLempCP",
 	"description": "Management scripts for LEMP web servers",
 	"version":     "0.1.0",
 	"type":        "project",
@@ -12,7 +12,10 @@
 	}],
 	"autoload": {
 		"psr-4": {
-			"xLempCP\\Shell": "src"
+			"xLempCP\\Shell": "shell/src"
+		},
+		"psr-4": {
+			"xLempCP\\Website": "website/src"
 		}
 	},
 	"archive": {
