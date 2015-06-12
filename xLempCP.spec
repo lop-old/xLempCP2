@@ -11,6 +11,8 @@ Requires        : php56w-mbstring
 Requires        : php56w-mcrypt
 Requires        : php56w-pdo
 Requires        : php56w-xml
+Requires        : php56w-pear
+Requires        : php56w-pecl-xdebug
 Requires        : php-composer
 Requires        : nginx >= 1.6.3
 Requires        : bash
