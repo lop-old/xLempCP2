@@ -22,7 +22,7 @@ Requires        : unzip
 Requires        : dialog
 Prefix          : /usr/bin/xLempCP
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.noarch.rpm
-%define  USERNAME  xLempCP
+%define  USERNAME  xlemp
 
 License         : GPA-3
 Group           : Server Platform
