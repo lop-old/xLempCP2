@@ -91,19 +91,29 @@ echo "Install.."
 	"${RPM_BUILD_ROOT}%{_sysconfdir}/skel/logs/" \
 	"${RPM_BUILD_ROOT}%{_sysconfdir}/skel/ssl/" \
 		|| exit 1
+#install -c -m 0644 % SOURCE1 $ RPM_BUILD_ROOT/etc/skel/.bashrc
 # /home/xlemp
 %{__install} -d \
-	"${RPM_BUILD_ROOT}/home/" \
-		|| exit 1
-%{__install} -d -m 700 -o %{USERNAME} -g %{USERNAME} \
 	"${RPM_BUILD_ROOT}/home/%{USERNAME}/" \
 		|| exit 1
-#install -c -m644 %SOURCE1 $RPM_BUILD_ROOT/etc/skel/.bashrc
 
-# alias symlinks
-ln -sf "%{prefix}/shell/src/cli.php" "${RPM_BUILD_ROOT}%{_bindir}/xlemp"
+# xlemp command alias
+%{__cat} <<EOF >"${RPM_BUILD_ROOT}%{_bindir}/xlemp" \
+	|| exit 1
+#!/usr/bin/php
+<?php
+
+require('/usr/bin/xLempCP/shell/src/cli.php');
+
+EOF
+%{__chmod} 0555 \
+	"${RPM_BUILD_ROOT}%{_bindir}/xlemp" \
+		|| exit 1
+#ln -sf "%{prefix}/shell/src/cli.php" "${RPM_BUILD_ROOT}%{_bindir}/xlemp"
+
+# www/ -> public_html/ alias
 pushd "${RPM_BUILD_ROOT}%{_sysconfdir}/skel/"
-ln -sf public_html/ www
+	ln -sf public_html/ www
 popd
 
 # copy xLempCP.tar.gz
@@ -139,11 +149,18 @@ popd
 ### Files ###
 %files
 %defattr(-,root,root,-)
+
+# /home/xlemp
+%attr(700, %{USERNAME}, %{USERNAME}) /home/%{USERNAME}/
+
+# /usr/bin
 "%{prefix}/%{name}-%{version}.tar.gz"
 %{_bindir}/xlemp
+
+# /etc/skel
 %dir "%{_sysconfdir}/skel/"
 %dir "%{_sysconfdir}/skel/public_html/"
-%dir "%{_sysconfdir}/skel/www/"
+%attr(-, root, root) "%{_sysconfdir}/skel/www"
 %dir "%{_sysconfdir}/skel/etc/"
 %dir "%{_sysconfdir}/skel/logs/"
 %dir "%{_sysconfdir}/skel/ssl/"
