@@ -37,7 +37,7 @@ Management scripts for LEMP web servers (Linux/Nginx/MySQL/PHP)
 ### Prep ###
 %prep
 # ensure xLempCP user exists
-if getent passwd "${USERNAME}" >/dev/null ; then
+if getent passwd "%{USERNAME}" >/dev/null ; then
 	echo "Found existing user: %{USERNAME}"
 else
 	echo "Creating user: %{USERNAME}"
@@ -53,7 +53,7 @@ else
 			echo "Failed to create user!"
 			exit 1
 	}
-	if id -u "%{USERNAME}" >/dev/null 2>&1 ; then
+	if getent passwd "%{USERNAME}" >/dev/null 2>&1 ; then
 		echo "Created user: %{USERNAME}"
 	else
 		echo "User creation failed!"
