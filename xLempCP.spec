@@ -3,6 +3,7 @@ Summary         : Management scripts for LEMP web servers
 Version         : 0.1.%{BUILD_NUMBER}
 Release         : 1
 BuildArch       : noarch
+Requires        : shellscripts
 Requires        : php56w
 Requires        : php56w-fpm
 Requires        : php56w-cli
