@@ -13,9 +13,13 @@
 
 		<fileSet>
 			<directory>${project.basedir}/shell</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/shell/</outputDirectory>
 			<lineEnding>crlf</lineEnding>
 			<useDefaultExcludes>true</useDefaultExcludes>
+			<includes>
+				<include>src/**</include>
+				<include>vendor/**</include>
+			</includes>
 			<excludes>
 
 				<exclude>**/.gitignore</exclude>
@@ -23,7 +27,6 @@
 
 				<exclude>.git</exclude>
 				<exclude>**/composer.phar</exclude>
-				<exclude>**/vendor/</exclude>
 				<exclude>**/pom.xml</exclude>
 				<exclude>**/pom.xml.original</exclude>
 				<exclude>**/package.xml</exclude>
@@ -60,9 +63,11 @@
 
 		<fileSet>
 			<directory>${project.basedir}/website</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/website/</outputDirectory>
 			<lineEnding>crlf</lineEnding>
 			<useDefaultExcludes>true</useDefaultExcludes>
+			<includes>
+			</includes>
 			<excludes>
 
 				<exclude>**/.gitignore</exclude>
@@ -70,7 +75,6 @@
 
 				<exclude>.git</exclude>
 				<exclude>**/composer.phar</exclude>
-				<exclude>**/vendor/</exclude>
 				<exclude>**/pom.xml</exclude>
 				<exclude>**/pom.xml.original</exclude>
 				<exclude>**/package.xml</exclude>
