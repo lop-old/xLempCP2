@@ -36,6 +36,32 @@ Management scripts for LEMP web servers (Linux/Nginx/MySQL/PHP)
 
 ### Prep ###
 %prep
+# ensure xLempCP user exists
+if getent passwd "${USERNAME}" >/dev/null ; then
+	echo "Found existing user: %{USERNAME}"
+else
+	echo "Creating user: %{USERNAME}"
+	if getent group "${USERNAME}" >/dev/null ; then
+		sudo -n groupadd --system "${USERNAME}" || {
+			echo "Failed to create group!"
+			exit 1
+		}
+	fi
+	sudo -n adduser --system --shell /sbin/nologin \
+		--home-dir "/home/%{USERNAME}" \
+		-g "%{USERNAME}" "%{USERNAME}" || {
+			echo "Failed to create user!"
+			exit 1
+	}
+	if id -u "%{USERNAME}" >/dev/null 2>&1 ; then
+		echo "Created user: %{USERNAME}"
+	else
+		echo "User creation failed!"
+		exit 1
+	fi
+fi
+echo
+echo
 
 
 
@@ -93,36 +119,6 @@ popd
 #	%{__rm} -rf --preserve-root "%{_topdir}" \
 #		|| echo "Failed to delete build root (probably fine..)"
 #fi
-
-
-
-%pre
-# ensure xLempCP user exists
-if getent passwd "${USERNAME}" >/dev/null ; then
-	echo "Found existing user: %{USERNAME}"
-else
-	echo "Creating user: %{USERNAME}"
-	if getent group "${USERNAME}" >/dev/null ; then
-		sudo groupadd --system "${USERNAME}" || {
-			echo "Failed to create group!"
-			exit 1
-		}
-	fi
-	sudo adduser --system -shell /sbin/nologin \
-		--home-dir "/home/%{USERNAME}" \
-		-g "%{USERNAME}" "%{USERNAME}" || {
-			echo "Failed to create user!"
-			exit 1
-	}
-	if id -u "%{USERNAME}" >/dev/null 2>&1 ; then
-		echo "Created user: %{USERNAME}"
-	else
-		echo "User creation failed!"
-		exit 1
-	fi
-fi
-echo
-echo
 
 
 
