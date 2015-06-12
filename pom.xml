@@ -23,6 +23,8 @@
 				<version>2.4</version>
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
+					<tarLongFileMode>gnu</tarLongFileMode>
+					<ignorePermissions>true</ignorePermissions>
 					<descriptors>
 						<descriptor>package.xml</descriptor>
 					</descriptors>
