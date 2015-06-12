@@ -42,8 +42,8 @@ if getent passwd "%{USERNAME}" >/dev/null ; then
 	echo "Found existing user: %{USERNAME}"
 else
 	echo "Creating user: %{USERNAME}"
-	if getent group "${USERNAME}" >/dev/null ; then
-		sudo -n groupadd --system "${USERNAME}" || {
+	if getent group "%{USERNAME}" >/dev/null ; then
+		sudo -n groupadd --system "%{USERNAME}" || {
 			echo "Failed to create group!"
 			exit 1
 		}
