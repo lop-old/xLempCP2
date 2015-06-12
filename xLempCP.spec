@@ -64,8 +64,10 @@ echo "Install.."
 	"${RPM_BUILD_ROOT}%{_sysconfdir}/skel/logs/" \
 	"${RPM_BUILD_ROOT}%{_sysconfdir}/skel/ssl/" \
 		|| exit 1
+# alias symlinks
+ln -sf "%{prefix}/shell/src/cli.php" "${RPM_BUILD_ROOT}%{_bindir}/xlemp"
 pushd "${RPM_BUILD_ROOT}%{_sysconfdir}/skel/"
-ln -s public_html/ www
+ln -sf public_html/ www
 popd
 
 #install -c -m644 %SOURCE1 $RPM_BUILD_ROOT/etc/skel/.bashrc
@@ -134,8 +136,10 @@ popd
 %files
 %defattr(-,root,root,-)
 "%{prefix}/%{name}-%{version}.tar.gz"
+%{_bindir}/xlemp
 %dir "%{_sysconfdir}/skel/"
 %dir "%{_sysconfdir}/skel/public_html/"
+%dir "%{_sysconfdir}/skel/www/"
 %dir "%{_sysconfdir}/skel/etc/"
 %dir "%{_sysconfdir}/skel/logs/"
 %dir "%{_sysconfdir}/skel/ssl/"
