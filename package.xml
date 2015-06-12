@@ -10,7 +10,6 @@
 	<fileSets>
 
 
-
 		<fileSet>
 			<directory>${project.basedir}/shell</directory>
 			<outputDirectory>/shell/</outputDirectory>
@@ -18,6 +17,101 @@
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<includes>
 				<include>src/**</include>
+			</includes>
+			<excludes>
+
+				<exclude>**/.gitignore</exclude>
+				<exclude>**/config.php</exclude>
+
+				<exclude>.git</exclude>
+				<exclude>**/composer.phar</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/pom.xml.original</exclude>
+				<exclude>**/package.xml</exclude>
+
+				<exclude>**/target/</exclude>
+				<exclude>**/rpmbuild-root/</exclude>
+				<exclude>**/bin/</exclude>
+				<exclude>**/out/</exclude>
+				<exclude>**/build/</exclude>
+				<exclude>**/.project</exclude>
+				<exclude>**/.classpath</exclude>
+				<exclude>**/.settings/</exclude>
+
+				<exclude>*.swp</exclude>
+				<exclude>.*.swp</exclude>
+				<exclude>*.out</exclude>
+				<exclude>~</exclude>
+
+				<exclude>*.log</exclude>
+				<exclude>*.zip</exclude>
+				<exclude>*.exe</exclude>
+				<exclude>*.rpm</exclude>
+				<exclude>*.deb</exclude>
+				<exclude>*.jar</exclude>
+				<exclude>*.war</exclude>
+				<exclude>*.ear</exclude>
+				<exclude>*.class</exclude>
+				<exclude>*.idea</exclude>
+
+			</excludes>
+		</fileSet>
+
+
+		<fileSet>
+			<directory>${project.basedir}/website</directory>
+			<outputDirectory>/website/</outputDirectory>
+			<lineEnding>crlf</lineEnding>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<includes>
+				<include>src/**</include>
+			</includes>
+			<excludes>
+
+				<exclude>**/.gitignore</exclude>
+				<exclude>**/config.php</exclude>
+
+				<exclude>.git</exclude>
+				<exclude>**/composer.phar</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/pom.xml.original</exclude>
+				<exclude>**/package.xml</exclude>
+
+				<exclude>**/target/</exclude>
+				<exclude>**/rpmbuild-root/</exclude>
+				<exclude>**/bin/</exclude>
+				<exclude>**/out/</exclude>
+				<exclude>**/build/</exclude>
+				<exclude>**/.project</exclude>
+				<exclude>**/.classpath</exclude>
+				<exclude>**/.settings/</exclude>
+
+				<exclude>*.swp</exclude>
+				<exclude>.*.swp</exclude>
+				<exclude>*.out</exclude>
+				<exclude>~</exclude>
+
+				<exclude>*.log</exclude>
+				<exclude>*.zip</exclude>
+				<exclude>*.exe</exclude>
+				<exclude>*.rpm</exclude>
+				<exclude>*.deb</exclude>
+				<exclude>*.jar</exclude>
+				<exclude>*.war</exclude>
+				<exclude>*.ear</exclude>
+				<exclude>*.class</exclude>
+				<exclude>*.idea</exclude>
+
+			</excludes>
+		</fileSet>
+
+
+		<fileSet>
+			<directory>${project.basedir}/vendor</directory>
+			<outputDirectory>/vendor/</outputDirectory>
+			<lineEnding>crlf</lineEnding>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<includes>
 				<include>vendor/**</include>
 			</includes>
 			<excludes>
@@ -58,55 +152,6 @@
 
 			</excludes>
 		</fileSet>
-
-
-
-		<fileSet>
-			<directory>${project.basedir}/website</directory>
-			<outputDirectory>/website/</outputDirectory>
-			<lineEnding>crlf</lineEnding>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<includes>
-			</includes>
-			<excludes>
-
-				<exclude>**/.gitignore</exclude>
-				<exclude>**/config.php</exclude>
-
-				<exclude>.git</exclude>
-				<exclude>**/composer.phar</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/pom.xml.original</exclude>
-				<exclude>**/package.xml</exclude>
-
-				<exclude>**/target/</exclude>
-				<exclude>**/rpmbuild-root/</exclude>
-				<exclude>**/bin/</exclude>
-				<exclude>**/out/</exclude>
-				<exclude>**/build/</exclude>
-				<exclude>**/.project</exclude>
-				<exclude>**/.classpath</exclude>
-				<exclude>**/.settings/</exclude>
-
-				<exclude>*.swp</exclude>
-				<exclude>.*.swp</exclude>
-				<exclude>*.out</exclude>
-				<exclude>~</exclude>
-
-				<exclude>*.log</exclude>
-				<exclude>*.zip</exclude>
-				<exclude>*.exe</exclude>
-				<exclude>*.rpm</exclude>
-				<exclude>*.deb</exclude>
-				<exclude>*.jar</exclude>
-				<exclude>*.war</exclude>
-				<exclude>*.ear</exclude>
-				<exclude>*.class</exclude>
-				<exclude>*.idea</exclude>
-
-			</excludes>
-		</fileSet>
-
 
 
 	</fileSets>
