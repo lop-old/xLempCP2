@@ -111,6 +111,20 @@ popd
 
 
 
+%post
+pushd "%{prefix}/"
+tar -xvzf "%{name}-%{version}.tar.gz" \
+	|| exit 1
+popd
+
+
+
+%preun
+%{__rm} -Rvf --preserve-root %{prefix}/shell
+%{__rm} -Rvf --preserve-root %{prefix}/website
+
+
+
 ### Files ###
 %files
 %defattr(-,root,root,-)
