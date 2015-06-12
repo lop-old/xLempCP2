@@ -12,15 +12,15 @@
 	}],
 	"autoload": {
 		"psr-4": {
-			"xLempCP\\Shell": "shell/src"
+			"xLempCP\\Shell": "shell/src/"
 		},
 		"psr-4": {
-			"xLempCP\\Website": "website/src"
+			"xLempCP\\Website": "website/src/"
 		}
 	},
 	"archive": {
 		"exclude": [
-			"/example"
+			"/example/"
 		]
 	},
 	"require": {

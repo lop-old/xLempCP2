@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0be33cccb64e8277ce1ce9892e5a069a",
+    "hash": "81fd185dcc20b045e29be749901bed0f",
     "packages": [
         {
             "name": "51systems/doctrine-encrypt",
