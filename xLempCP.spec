@@ -99,7 +99,7 @@ echo "Install.."
 		|| exit 1
 
 # xlemp command alias
-%{__cat} <<EOF >"${RPM_BUILD_ROOT}%{_bindir}/xlemp" \
+%{__cat} <<EOF >"${RPM_BUILD_ROOT}%{_bindir}/xlemp-cli" \
 	|| exit 1
 #!/usr/bin/php
 <?php
@@ -108,9 +108,9 @@ require('/usr/bin/xLempCP/shell/src/cli.php');
 
 EOF
 %{__chmod} 0555 \
-	"${RPM_BUILD_ROOT}%{_bindir}/xlemp" \
+	"${RPM_BUILD_ROOT}%{_bindir}/xlemp-cli" \
 		|| exit 1
-#ln -sf "%{prefix}/shell/src/cli.php" "${RPM_BUILD_ROOT}%{_bindir}/xlemp"
+#ln -sf "%{prefix}/shell/src/cli.php" "${RPM_BUILD_ROOT}%{_bindir}/xlemp-cli"
 
 # www/ -> public_html/ alias
 pushd "${RPM_BUILD_ROOT}%{_sysconfdir}/skel/"
@@ -166,7 +166,7 @@ popd
 %attr(700, %{USERNAME}, %{USERNAME}) /home/%{USERNAME}/
 
 # /usr/bin
-"/usr/bin/xlemp"
+"/usr/bin/xlemp-cli"
 "%{prefix}/%{name}_shell-%{version}.tar.gz"
 "/usr/share/xLempCP/%{name}_website-%{version}.tar.gz"
 
