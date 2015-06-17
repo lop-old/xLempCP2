@@ -21,7 +21,7 @@ Requires        : wget
 Requires        : zip
 Requires        : unzip
 Requires        : dialog
-Prefix          : /usr/bin/xLempCP
+Prefix          : %{_bindir}/xLempCP
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.noarch.rpm
 %define  USERNAME  xlemp
 
@@ -80,8 +80,8 @@ echo "Install.."
 # create directories
 %{__install} -d -m 0755 \
 	"${RPM_BUILD_ROOT}%{prefix}/" \
-	"${RPM_BUILD_ROOT}%{prefix}/shell/" \
-	"${RPM_BUILD_ROOT}%{prefix}/website/" \
+	"${RPM_BUILD_ROOT}%{_localstatedir}/www/xLempCP" \
+	"${RPM_BUILD_ROOT}/usr/share/xLempCP" \
 		|| exit 1
 
 # /etc/skel
@@ -117,10 +117,15 @@ pushd "${RPM_BUILD_ROOT}%{_sysconfdir}/skel/"
 	ln -sf public_html/ www
 popd
 
-# copy xLempCP.tar.gz
+# copy xLempCP_shell-x.x.x.tar.gz
 %{__install} -m 400 \
-	"%{SOURCE_ROOT}/target/%{name}-%{version}.tar.gz" \
+	"%{SOURCE_ROOT}/shell/target/%{name}_shell-%{version}.tar.gz" \
 	"${RPM_BUILD_ROOT}%{prefix}/" \
+		|| exit 1
+# copy xLempCP_website-x.x.x.tar.gz
+%{__install} -m 400 \
+	"%{SOURCE_ROOT}/website/target/%{name}_website-%{version}.tar.gz" \
+	"${RPM_BUILD_ROOT}/usr/share/xLempCP/" \
 		|| exit 1
 
 
@@ -134,16 +139,22 @@ popd
 
 
 %post
+# extract xLempCP_shell-x.x.x.tar.gz to /usr/bin/xLempCP/
 pushd "%{prefix}/"
-tar -xvzf "%{name}-%{version}.tar.gz" \
+tar -xvzf "%{name}_shell-%{version}.tar.gz" \
+	|| exit 1
+popd
+# extract xLempCP_website-x.x.x.tar.gz to /usr/share/
+pushd "/usr/share/xLempCP/"
+tar -xvzf "%{name}_website-%{version}.tar.gz" \
 	|| exit 1
 popd
 
 
 
 %preun
-%{__rm} -Rvf --preserve-root %{prefix}/shell
-%{__rm} -Rvf --preserve-root %{prefix}/website
+%{__rm} -Rvf --preserve-root "%{prefix}/"
+%{__rm} -Rvf --preserve-root /usr/share/xLempCP/
 
 
 
@@ -155,16 +166,15 @@ popd
 %attr(700, %{USERNAME}, %{USERNAME}) /home/%{USERNAME}/
 
 # /usr/bin
-"%{prefix}/%{name}-%{version}.tar.gz"
-%{_bindir}/xlemp
+"/usr/bin/xlemp"
+"%{prefix}/%{name}_shell-%{version}.tar.gz"
+"/usr/share/xLempCP/%{name}_website-%{version}.tar.gz"
 
 # /etc/skel
-%dir "%{_sysconfdir}/skel/"
-%dir "%{_sysconfdir}/skel/public_html/"
+%attr(-, root, root) %dir "%{_sysconfdir}/skel/public_html/"
 %attr(-, root, root) "%{_sysconfdir}/skel/www"
-%dir "%{_sysconfdir}/skel/etc/"
-%dir "%{_sysconfdir}/skel/logs/"
-%dir "%{_sysconfdir}/skel/ssl/"
+%attr(-, root, root) %dir "%{_sysconfdir}/skel/logs/"
+%attr(-, root, root) %dir "%{_sysconfdir}/skel/ssl/"
 %config(noreplace) %{_sysconfdir}/skel/*
 
 # % {prefix}/composer.json
